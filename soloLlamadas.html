@@ -33,42 +33,69 @@
 table.dataTable thead th{background:#005b94;color:#fff;border-bottom:0;font-size:12px} table.dataTable tbody td{font-size:12px;white-space:nowrap}
 .dataTables_wrapper .dt-buttons button{border:1px solid #9aa5ad;background:#f7f7f7;border-radius:2px;padding:5px 10px}
 .status-ok{font-weight:700;color:#166534} .status-no{font-weight:700;color:#991b1b}
+
+.ca-toggle{position:fixed;right:18px;top:112px;z-index:1001;border:0;background:var(--accent);color:#fff;font-weight:800;border-radius:4px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.18);cursor:pointer}
+.ca-sidebar{position:fixed;right:0;top:0;height:100vh;width:360px;background:#fff;border-left:1px solid #d8e1e8;box-shadow:-4px 0 18px rgba(0,0,0,.12);z-index:1000;transform:translateX(0);transition:transform .22s ease;overflow:auto;padding:18px 18px 28px}
+.ca-sidebar.hidden{transform:translateX(100%)}
+.ca-sidebar h3{margin:0 0 8px;color:#005b94;font-size:18px}.ca-sidebar p{margin:0 0 12px;color:#66727c;font-size:12px;line-height:1.35}.ca-list{display:flex;flex-direction:column;gap:10px}.ca-item{border:1px solid #e4e8eb;border-left:4px solid var(--accent);background:#fbfcfd;padding:10px;border-radius:3px}.ca-item b{display:block;color:#8a5a00;margin-bottom:4px}.ca-item span{font-size:12px;line-height:1.35;color:#26323b}.ca-badge{display:inline-flex;align-items:center;gap:2px;background:#fff3e0;color:#8a4a00;border:1px solid #ffd59c;border-radius:999px;padding:2px 7px;font-size:11px;font-weight:800;white-space:nowrap;margin-left:6px;vertical-align:middle}.ca-badge.blue{background:#eef6ff;color:#005b94;border-color:#bfdbfe}.ca-tags{margin:6px 0 10px}.with-ca{position:relative}.ca-pill-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:4px 0 10px}@media(max-width:900px){.ca-sidebar{width:min(92vw,360px)}.ca-toggle{top:auto;bottom:18px;right:18px}}
+
 @media(max-width:900px){.manifest,.formrow,.kpis{grid-template-columns:1fr}.subbar .desc{display:none}}
 </style>
 </head>
 <body>
+<aside id="caSidebar" class="ca-sidebar">
+  <h3>Criterios de aceptación</h3>
+  <p>Barra de trazabilidad del mockup. Cada componente muestra el CA que valida.</p>
+  <div class="ca-list">
+    <div class="ca-item"><b>CA-01</b><span>Generar el reporte por rango de fechas seleccionado.</span></div>
+    <div class="ca-item"><b>CA-02</b><span>Mostrar el total de llamadas del periodo.</span></div>
+    <div class="ca-item"><b>CA-03</b><span>Mostrar cantidad y porcentaje de llamadas contestadas.</span></div>
+    <div class="ca-item"><b>CA-04</b><span>Mostrar cantidad y porcentaje de llamadas no contestadas.</span></div>
+    <div class="ca-item"><b>CA-05</b><span>Calcular porcentajes sobre el total de llamadas.</span></div>
+    <div class="ca-item"><b>CA-06</b><span>Manejar rangos sin llamadas sin generar error.</span></div>
+    <div class="ca-item"><b>CA-07</b><span>Mostrar lista detallada de llamadas realizadas.</span></div>
+    <div class="ca-item"><b>CA-08</b><span>Mostrar campos mínimos: fecha/hora, número destino, duración y estado.</span></div>
+    <div class="ca-item"><b>CA-09</b><span>Indicar si la llamada fue contestada o no contestada.</span></div>
+    <div class="ca-item"><b>CA-10</b><span>No mostrar información de alertas en Fase 1.</span></div>
+    <div class="ca-item"><b>CA-11</b><span>Permitir exportar el detalle en formato operativo.</span></div>
+    <div class="ca-item"><b>CA-12</b><span>Mantener consistencia entre resumen y detalle.</span></div>
+    <div class="ca-item"><b>CA-13</b><span>Identificar que la relación llamada-alerta queda para Fase 2.</span></div>
+  </div>
+</aside>
+<button id="caToggle" class="ca-toggle" type="button">Ocultar CA</button>
+
 <div class="topbar">☰ <span>Reportes</span></div>
 <div class="subbar">▣ ▤ ◷ › <strong>Llamadas</strong><span class="desc">Muestra las llamadas realizadas por el proveedor en el rango de fechas y horario seleccionado.</span></div>
 <div class="container">
 <section id="manifestPage" class="card manifest">
   <div class="iconbox">☎</div>
   <div>
-    <h3>Llamadas</h3>
-    <p>Reporte simple de llamadas realizadas. Esta primera fase no relaciona alertas; sólo muestra el volumen de llamadas, contestadas, no contestadas y el detalle completo del rango consultado.</p>
+    <h3>Llamadas <span class="ca-badge">CA-10</span><span class="ca-badge">CA-13</span></h3>
+    <p>Reporte simple de llamadas realizadas. Esta primera fase no relaciona alertas; sólo muestra el volumen de llamadas, contestadas, no contestadas y el detalle completo del rango consultado. <span class="ca-badge">CA-10</span><span class="ca-badge">CA-13</span></p>
     <strong style="color:#005b94">🔍 VER VISTA PREVIA</strong>
   </div>
-  <div class="field"><label>Fechas:</label><div class="input">01 Abril, 2026 - 20 Abril, 2026 <span>◷</span></div></div>
+  <div class="field"><label>Fechas: <span class="ca-badge">CA-01</span><span class="ca-badge">CA-06</span></label><div class="input">01 Abril, 2026 - 20 Abril, 2026 <span>◷</span></div></div>
   <div style="grid-column:1 / -1" class="formrow">
     <div class="field"><label>Grupos</label><div class="input">🔍 Buscar 385 ... <span>0</span></div></div>
     <div class="field"><label>Destino / línea telefónica</label><div class="input">Todas las líneas <span>⌄</span></div></div>
-    <div class="field"><label>Rango horario</label><div class="input">00:00 - 23:59 <span>⌄</span></div></div>
+    <div class="field"><label>Rango horario <span class="ca-badge">CA-01</span></label><div class="input">00:00 - 23:59 <span>⌄</span></div></div>
   </div>
-  <div style="grid-column:1 / -1" class="actions"><span>AGENDAR REPORTE</span><button id="generateReportBtn" class="btn primary" type="button">GENERAR REPORTE</button></div>
+  <div style="grid-column:1 / -1" class="actions"><span>AGENDAR REPORTE</span><button id="generateReportBtn" class="btn primary" type="button">GENERAR REPORTE <span class="ca-badge blue">CA-01</span></button></div>
 </section>
 <section id="reportPage" class="card report" style="display:none">
   <div class="tabs"><button class="tab active" data-tab="summary">RESUMEN</button><button class="tab" data-tab="detail">DETALLES</button></div>
-  <div class="reportHeader"><div class="reportTitle"><h2>Llamadas</h2><b>01 Abril, 2026, 12:00:00 Am - 20 Abril, 2026, 11:59:59 Pm | America/Bogota</b><br><b>Total de llamadas en este reporte: 2499</b></div><div id="backToManifestLogo" class="logo" title="Regresar al manifest"><span>FM</span> FleetMetriks</div></div>
-  <div class="note"><b>Primera fase:</b> este mockup no relaciona alertas. El universo del reporte son únicamente las llamadas realizadas en el rango de fechas y horario seleccionado. En una segunda fase se podría agregar la relación llamada-alerta.</div>
-  <div id="summary" class="panel active"><h3>Resumen de llamadas</h3>
+  <div class="reportHeader"><div class="reportTitle"><h2>Llamadas <span class="ca-badge">CA-10</span></h2><b>01 Abril, 2026, 12:00:00 Am - 20 Abril, 2026, 11:59:59 Pm | America/Bogota</b><br><b>Total de llamadas en este reporte: 2499</b> <span class="ca-badge">CA-02</span><span class="ca-badge">CA-12</span></div><div id="backToManifestLogo" class="logo" title="Regresar al manifest"><span>FM</span> FleetMetriks</div></div>
+  <div class="note"><b>Primera fase:</b> este mockup no relaciona alertas. El universo del reporte son únicamente las llamadas realizadas en el rango de fechas y horario seleccionado. En una segunda fase se podría agregar la relación llamada-alerta. <span class="ca-badge">CA-10</span><span class="ca-badge">CA-13</span></div>
+  <div id="summary" class="panel active"><h3>Resumen de llamadas <span class="ca-badge">CA-02</span><span class="ca-badge">CA-03</span><span class="ca-badge">CA-04</span><span class="ca-badge">CA-05</span><span class="ca-badge">CA-12</span></h3>
     <div class="kpis">
-      <div class="kpi"><div class="n">2,499</div><div class="l">Llamadas totales</div></div>
-      <div class="kpi"><div class="n">2,311<span class="pct">92.5%</span></div><div class="l">Llamadas contestadas</div></div>
-      <div class="kpi"><div class="n">188<span class="pct">7.5%</span></div><div class="l">Llamadas no contestadas</div></div>
-      <div class="kpi"><div class="n">18.8s</div><div class="l">Duración promedio</div></div>
+      <div class="kpi"><div class="n">2,499 <span class="ca-badge">CA-02</span></div><div class="l">Llamadas totales</div></div>
+      <div class="kpi"><div class="n">2,311<span class="pct">92.5%</span> <span class="ca-badge">CA-03</span><span class="ca-badge">CA-05</span></div><div class="l">Llamadas contestadas</div></div>
+      <div class="kpi"><div class="n">188<span class="pct">7.5%</span> <span class="ca-badge">CA-04</span><span class="ca-badge">CA-05</span></div><div class="l">Llamadas no contestadas</div></div>
+      <div class="kpi"><div class="n">18.8s <span class="ca-badge">CA-08</span></div><div class="l">Duración promedio</div></div>
     </div>
-    <table id="summaryTable" class="display nowrap" style="width:100%"></table>
+    <div class="ca-pill-row"><span class="ca-badge">CA-02</span><span class="ca-badge">CA-03</span><span class="ca-badge">CA-04</span><span class="ca-badge">CA-05</span><span class="ca-badge">CA-11</span><span class="ca-badge">CA-12</span></div><table id="summaryTable" class="display nowrap" style="width:100%"></table>
   </div>
-  <div id="detail" class="panel"><h3>Detalle de llamadas realizadas</h3><table id="detailTable" class="display nowrap" style="width:100%"></table></div>
+  <div id="detail" class="panel"><h3>Detalle de llamadas realizadas <span class="ca-badge">CA-07</span><span class="ca-badge">CA-08</span><span class="ca-badge">CA-09</span><span class="ca-badge">CA-11</span><span class="ca-badge">CA-12</span></h3><div class="ca-pill-row"><span class="ca-badge">CA-07</span><span class="ca-badge">CA-08</span><span class="ca-badge">CA-09</span><span class="ca-badge">CA-11</span></div><table id="detailTable" class="display nowrap" style="width:100%"></table></div>
 </section>
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -88,18 +115,23 @@ const tableLang={"decimal":"","emptyTable":"No hay datos disponibles","info":"Mo
 let summaryTable, detailTable;
 function initTables(){
   if(summaryTable) return;
-  summaryTable=$('#summaryTable').DataTable({data:summaryRows,columns:[{data:'Métrica',title:'Métrica'},{data:'Cantidad',title:'Cantidad'},{data:'Porcentaje',title:'Porcentaje'}],dom:'Bfrtip',buttons:['copy','csv','excel','print'],pageLength:10,language:tableLang});
+  summaryTable=$('#summaryTable').DataTable({data:summaryRows,columns:[{data:'Métrica',title:'Métrica'},{data:'Cantidad',title:'Cantidad <span class="ca-badge">CA-02</span>'},{data:'Porcentaje',title:'Porcentaje <span class="ca-badge">CA-05</span>'}],dom:'Bfrtip',buttons:['copy','csv','excel','print'],pageLength:10,language:tableLang});
   detailTable=$('#detailTable').DataTable({data:callsData,columns:[
-    {data:'Fecha/hora llamada',title:'Fecha/hora llamada'},
-    {data:'Teléfono llamado',title:'Teléfono llamado'},
-    {data:'Duración llamada (seg)',title:'Duración llamada (seg)'},
-    {data:'Contestada',title:'Contestada',render:function(data){return data==='Sí'?'<span class="status-ok">Sí</span>':'<span class="status-no">No</span>';}},
-    {data:'Estado proveedor',title:'Estado proveedor'}
+    {data:'Fecha/hora llamada',title:'Fecha/hora llamada <span class="ca-badge">CA-08</span>'},
+    {data:'Teléfono llamado',title:'Teléfono llamado <span class="ca-badge">CA-08</span>'},
+    {data:'Duración llamada (seg)',title:'Duración llamada (seg) <span class="ca-badge">CA-08</span>'},
+    {data:'Contestada',title:'Contestada <span class="ca-badge">CA-09</span>',render:function(data){return data==='Sí'?'<span class="status-ok">Sí</span>':'<span class="status-no">No</span>';}},
+    {data:'Estado proveedor',title:'Estado proveedor <span class="ca-badge">CA-09</span>'}
   ],dom:'Bfrtip',buttons:['copy','csv','excel','print','colvis'],pageLength:25,order:[[0,'desc']],language:tableLang,scrollX:true});
 }
 $('#generateReportBtn').on('click',function(){$('#manifestPage').hide();$('#reportPage').show();initTables();setTimeout(()=>{summaryTable.columns.adjust();detailTable.columns.adjust();},100);});
 $('#backToManifestLogo').on('click',function(){$('#reportPage').hide();$('#manifestPage').show();});
 $('.tab').on('click',function(){$('.tab').removeClass('active');$(this).addClass('active');$('.panel').removeClass('active');$('#'+$(this).data('tab')).addClass('active');setTimeout(()=>{if(summaryTable) summaryTable.columns.adjust(); if(detailTable) detailTable.columns.adjust();},100);});
+
+$('#caToggle').on('click',function(){
+  $('#caSidebar').toggleClass('hidden');
+  $(this).text($('#caSidebar').hasClass('hidden')?'Mostrar CA':'Ocultar CA');
+});
 </script>
 </body>
 </html>
